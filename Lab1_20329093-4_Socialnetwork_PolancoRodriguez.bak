@@ -1,30 +1,5 @@
 #lang racket
 
-;************************ PRIMER TDA (Usuario) **********************
-
-
-;---------------------------- CONSTRUCTOR ----------------------------
-
-(define (usuario idU nombre contra lista)
-  (list idU nombre contra lista))
-
-;---------------------------------------------------------------------
-
-;---------------------------- SELECTORES -----------------------------
-
-(define (getIdUsuario usuario)
-  (car usuario))
-
-(define (getNombre usuario)
-  (car (cdr usuario)))
-
-(define (getContra usuario)
-  (car (cdr (cdr usuario))))
-
-(define (getAmigos usuario)
-  (car (cdr (cdr (cdr usuario)))))
-
-;---------------------------------------------------------------------
 
 
 ;---------------------------- PERTENENCIA ----------------------------
@@ -74,14 +49,5 @@
 
 ;--------------------------------- EJEMPLOS --------------------------
 
-(define (amigos) (list 1 2 3 4 5))
 
-;(usuario 4 "Manuel" "banana2" (amigos))
-
-(define (listaCompartida) (list "juan" "pedro" "manuel"))
-(define (listaRespuestas) (list "wow que interesante" "dislike"))
-(define (listaReacciones) (list "like" "dislike"))
-
-
-;(Publicacion 0 "carla polanco" "24/05/2020" "link" "enlace a faebook" (listaRespuestas) (listaReacciones) (listaCompartida))
 
