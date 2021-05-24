@@ -1,0 +1,32 @@
+#lang racket
+(provide (all-defined-out))
+
+;**************************** TDA (Usuario Activo) ****************************
+
+
+;---------------------------- CONSTRUCTOR ----------------------------
+
+(define (usuarioActivo username password)
+  (list username password))
+
+;---------------------------------------------------------------------
+
+;---------------------------- SELECTORES -----------------------------
+
+(define (getusernameUA usuarioActivo)
+  (car usuarioActivo))
+
+(define (getpasswordUA usuarioAcitvo)
+  (car (cdr usuarioActivo)))
+
+
+;---------------------------------------------------------------------
+
+;---------------------------- PERTENENCIA ----------------------------
+
+
+;---------------------------------------------------------------------
+
+
+
+(define (UsuarioAC)(usuarioActivo "Manuel" "banana2"))

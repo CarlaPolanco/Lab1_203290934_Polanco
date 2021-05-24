@@ -2,6 +2,7 @@
 (provide (all-defined-out))
 (require "TDA_Usuario_20329093-4_PolancoRodriguez.rkt")
 (require "TDA_Publicacion_20329093-4_PolancoRodriguez.rkt")
+(require "TDA_Date_20329093-4_PolancoRodriguez.rkt")
 
 ;************************  TDA SocialNetwok **********************
 
@@ -15,35 +16,44 @@
 ;---------------------------- CONSTRUCTOR ----------------------------
 
 (define (socialnetwork NombreR Date encryptFunction decryptFunction)
-  (list NombreR Date encryptFunction decryptFunction (list) (list)))
+  (list NombreR Date encryptFunction decryptFunction (list)(list)(list)))
 
 ;---------------------------------------------------------------------
 
 ;------------------------------ SELECTORES ---------------------------
 
 (define (getNombre socialnetwork)
-  (list-ref 0))
+  (car socialnetwork))
 
 (define (getDate socialnetwork)
-  (list-ref 1))
+  (car (cdr socialnetwork)))
 
 (define (getEncry socialnetwork)
-  (list-ref 2))
+  (car (cdr (cdr socialnetwork))))
 
 (define (getDecry socialnetwork)
-  (list-ref 3))
+  (car (cdr (cdr (cdr socialnetwork)))))
 
-(define (getUsuario socialnetwork)
-  (list-ref 3))
+(define (getSeccionActiva socialnetwork)
+  (car (cdr (cdr (cdr (cdr socialnetwork))))))
+
+(define (getUsuarios socialnetwork)
+  (car (cdr (cdr (cdr (cdr (cdr socialnetwork)))))))
 
 (define (getPublicacion socialnetwork)
-  (list-ref 4))
+  (car (cdr (cdr (cdr (cdr (cdr (cdr socialnetwork))))))))
+
+(define (getUltimoID listaU)
+  (+ (length listaU) 1 ))
 
 ;-------------------------------------------------------------------------
 
-;------------------------------- EJEMPLOS --------------------------------
+;---------------------------- MODIFICADORES --------------------------
 
-(define fecha (list 25 10 2021))
 
-;(socialnetwork "FB" fecha encryptFn encryptFn)
+(define (AgregarUsuario nombre contra listaUsuario idU)
+  (if (null? listaUsuario)
+      (cons (usuario 0 idU nombre contra (list) (list)) null)
+      (cons  (car listaUsuario) (AgregarUsuario nombre contra (cdr listaUsuario) idU))))
+;---------------------------------------------------------------------
 

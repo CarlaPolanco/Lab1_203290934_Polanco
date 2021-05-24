@@ -1,6 +1,7 @@
 #lang racket
 
 (provide (all-defined-out))
+(require "TDA_Date_20329093-4_PolancoRodriguez.rkt")
 
 ;************************ TDA (Publicacion) **********************
 
@@ -49,4 +50,4 @@
 (define (listaReacciones) (list "like" "dislike"))
 
 
-;(Publicacion 0 "carla polanco" "24/05/2020" "link" "enlace a faebook" listaRespuestas listaReacciones listaCompartida 4)
+(define (Publicacion1)(Publicacion 0 "carla polanco" (Date 8 "noviembre" 1999) "link" "enlace a faebook" listaRespuestas listaReacciones listaCompartida 4))

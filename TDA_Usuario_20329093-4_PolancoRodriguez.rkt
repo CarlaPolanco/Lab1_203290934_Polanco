@@ -8,33 +8,44 @@
 ;---------------------------- CONSTRUCTOR ----------------------------
 
 (define (usuario Act idU nombre contra listaA listaS)
-  (list Act idU nombre contra listaA listaS))
+  (list idU nombre contra listaA listaS))
 
 ;---------------------------------------------------------------------
 
 ;---------------------------- SELECTORES -----------------------------
 
-(define (getAct usuario)
-  (car usuario))
 
 (define (getidU usuario)
+  (car usuario))
+
+(define (getNombreU usuario)
   (car (cdr usuario)))
 
-(define (getNombre usuario)
+(define (getContra usuario)
   (car (cdr (cdr usuario))))
 
-(define (getContra usuario)
+(define (getAmigos usuario)
   (car (cdr (cdr (cdr usuario)))))
 
-(define (getAmigos usuario)
+(define (getSeguidores usuario)
   (car (cdr (cdr (cdr (cdr usuario))))))
 
-(define (getSeguidores usuario)
-  list-ref usuario 5)
+;---------------------------------------------------------------------
+
+
+;---------------------------- PERTENENCIA ----------------------------
+
+(define (existeUsuario? listaUsuarios nombre)
+  (cond ((null? listaUsuarios)
+         #F)
+        ((eqv? (getNombreU (car (listaUsuarios)) nombre))
+         #T)
+        (else (existeUsuario? (cdr listaUsuarios) nombre))))
 
 ;---------------------------------------------------------------------
+
 
 (define (amigos) (list 1 2 3 4 5))
 (define (seguidores) (list "juan" "carla" "fran"))
 
-;(usuario 0 4 "Manuel" "banana2" (amigos) (seguidores))
+(define (Usuario1)(usuario 0 4 "Manuel" "banana2" (amigos) (seguidores)))
