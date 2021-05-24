@@ -4,16 +4,25 @@
 (require "TDA_Usuario_20329093-4_PolancoRodriguez.rkt")
 (require "TDA_Publicacion_20329093-4_PolancoRodriguez.rkt")
 (require "Socialnetwork_20329093-4_PolancoRodriguez.rkt")
+(require "TDA_UsuarioActivo_20329093-4_PolancoRodriguez.rkt")
 
 ;REGISTER
 
 (define(register socialnetwork date username password)
   (if (null? (getUsuarios socialnetwork))
-      (list (getNombre socialnetwork)(getDate socialnetwork)(getEncry socialnetwork)(getDecry socialnetwork)
-            (getSeccionActiva socialnetwork)(cons (usuario 0 1 username password (list) (list))
+      (list (getNombre socialnetwork)
+            (getDate socialnetwork)
+            (getEncry socialnetwork)
+            (getDecry socialnetwork)
+            (getSeccionActiva socialnetwork)
+            (cons (usuario 0 1 username password (list) (list))
                                                   (getUsuarios socialnetwork))(getPublicacion socialnetwork))
-      (list (getNombre socialnetwork)(getDate socialnetwork)(getEncry socialnetwork)(getDecry socialnetwork)
-            (getSeccionActiva socialnetwork)(AgregarUsuario username password (getUsuarios socialnetwork)
+      (list (getNombre socialnetwork)
+            (getDate socialnetwork)
+            (getEncry socialnetwork)
+            (getDecry socialnetwork)
+            (getSeccionActiva socialnetwork)
+            (AgregarUsuario username password (getUsuarios socialnetwork)
                                                             (getUltimoID(getUsuarios socialnetwork)))
             (getPublicacion socialnetwork))))
 
@@ -26,19 +35,37 @@
                            (getDate socialnetwork)
                            (getEncry socialnetwork)
                            (getDecry socialnetwork)
-                           (AgregarUsuarioA username password (getSeccionActiva socialnetwork))
+                           (AgregarUsuarioActivo user pass (getSeccionActiva socialnetwork))
                            (getUsuarios socialnetwork) 
                            (getPublicacion socialnetwork)))
           socialnetwork)
       (operacion socialnetwork)))
 
-; FALTA LIMPIAR USUARIO ACTIVO
+
 ;POST
 
-;(define post (lambda (socialnetwork)
-;              (lambda ())))
+(define post (lambda (socialnetwork)
+              (lambda (date)
+                (lambda (tipo resp . usuarios)
+      (list (getNombre socialnetwork)
+            (getDate socialnetwork)
+            (getEncry socialnetwork)
+            (getDecry socialnetwork)
+            (list)
+            (getUsuarios socialnetwork)
+            (AgregarPost (getUltimoID (getPublicacion socialnetwork))
+                   (getusernameUA (getSeccionActiva socialnetwork))
+                   date
+                   tipo
+                   resp
+                   (getPublicacion socialnetwork)
+                   usuarios))))))
 
+(define (follow socialnetwork) (lambda (date) (lambda (user) 5)))
 
+(define (share socialnetwork)(lambda (date)(lambda (ID . user) 4)))
+
+(define (socialnetwork->string socialnetwork) 5)
 
 
 
@@ -47,7 +74,7 @@
 
 (define fecha (list 25 10 2021))
 
-(define fb (socialnetwork "FB" fecha encryptFn encryptFn ))
+;(define fb (socialnetwork "FB" fecha encryptFn encryptFn ))
 
 (define emptyFB (socialnetwork "fb" fecha encryptFn encryptFn))
 
@@ -57,9 +84,13 @@
 
 (define listaUsuarios (list (usuario 0 4 "marcos" "banana2"  (amigos) (seguidores)) (usuario 0 4 "pia" "banana2" (amigos) (seguidores)) (usuario 0 4 "marcos" "banana2"  (amigos) (seguidores))))
 
+
 ;REGISTROS
 
-;(define fb (register (register (register emptyFB fecha “user1” “pass1”) fecha “user2” “pass2”) fecha "user3" "pass3"))
+(define fb (register (register (register emptyFB fecha "user1" "pass1") fecha "user2" "pass2") fecha "user3" "pass3"))
 
+; LOGIN POST
 
+(define fb1(((login fb "user2" "pass2" post)fecha)"text" "hola como estas"  "user1" "user2"))
+(define fb2(((login fb1 "user2" "pass2" post)fecha)"text" "hola como estas"))
 

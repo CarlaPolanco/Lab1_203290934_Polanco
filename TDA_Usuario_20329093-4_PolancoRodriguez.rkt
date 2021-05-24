@@ -33,14 +33,21 @@
 ;---------------------------------------------------------------------
 
 
+(define (addUsuario listaUsuarios username password)
+  (cond((null? listaUsuarios)
+         null)
+       ((and (equal? (getNombreU (car listaUsuarios))username) (equal? (getContra (car listaUsuarios)) password))
+         (car listaUsuarios))
+       (else (addUsuario (cdr listaUsuarios) username password ))))
+
 ;---------------------------- PERTENENCIA ----------------------------
 
 (define (existeUsuario? listaUsuarios nombre)
-  (cond ((null? listaUsuarios)
-         #F)
-        ((eqv? (getNombreU (car (listaUsuarios)) nombre))
-         #T)
-        (else (existeUsuario? (cdr listaUsuarios) nombre))))
+  (if(null? listaUsuarios)
+         #f
+        (if (eqv? (getNombreU (car listaUsuarios)) nombre)
+         #t
+        (existeUsuario? (cdr listaUsuarios) nombre))))
 
 ;---------------------------------------------------------------------
 
