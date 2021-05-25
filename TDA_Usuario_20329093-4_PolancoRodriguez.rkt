@@ -2,6 +2,7 @@
 
 (provide (all-defined-out))
 
+
 ;**************************** TDA (Usuario) ****************************
 
 
@@ -30,7 +31,7 @@
 (define (getSeguidores usuario)
   (car (cdr (cdr (cdr (cdr usuario))))))
 
-;---------------------------------------------------------------------
+;------------------------- MODIFICADOR --------------------------------
 
 
 (define (addUsuario listaUsuarios username password)

@@ -19,7 +19,7 @@
   (car usuarioActivo))
 
 (define (getpasswordUA usuarioActivo)
-  (cdr usuarioActivo))
+  (car (cdr usuarioActivo)))
 
 ;---------------------------------------------------------------------
 

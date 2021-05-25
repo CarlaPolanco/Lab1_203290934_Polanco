@@ -61,9 +61,24 @@
                    (getPublicacion socialnetwork)
                    usuarios))))))
 
-(define (follow socialnetwork) (lambda (date) (lambda (user) 5)))
+; FOLLOW
+
+(define follow (lambda (socialnetwork)
+                 (lambda (date)
+                   (lambda (user)
+                    (list (getNombre socialnetwork)
+                          (getDate socialnetwork)
+                          (getEncry socialnetwork)
+                          (getDecry socialnetwork)
+                          (list)
+                          (addSeguidor (getUsuarios socialnetwork)(car(car (getSeccionActiva socialnetwork))) user)
+                          (getPublicacion socialnetwork))))))
+
+; SHARE
 
 (define (share socialnetwork)(lambda (date)(lambda (ID . user) 4)))
+
+;SOCIALNETWORK->STRING
 
 (define (socialnetwork->string socialnetwork) 5)
 
@@ -93,4 +108,10 @@
 
 (define fb1(((login fb "user2" "pass2" post)fecha)"text" "hola como estas"  "user1" "user2"))
 (define fb2(((login fb1 "user2" "pass2" post)fecha)"text" "hola como estas"))
+
+;LOGION FOLLOW
+
+(define fb3 (((login fb2 "user1" "pass1" follow) fecha)"user2"))
+(define fb4 (((login fb3 "user3" "pass3" follow) fecha)"user2"))
+fb4
 

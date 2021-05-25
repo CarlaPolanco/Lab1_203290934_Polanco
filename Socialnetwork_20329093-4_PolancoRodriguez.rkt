@@ -64,5 +64,23 @@
 
 ;---------------------------------------------------------------------
 
+;Retorna la lista de usuario modificada
+
+(define (addSeguidor ListaUsuario username seguido)
+  (if (null? ListaUsuario) null
+      (if(eqv? (getNombreU (car ListaUsuario)) seguido)
+         (cons(list (getidU (car ListaUsuario))
+                    (getNombreU (car ListaUsuario))
+                    (getContra (car ListaUsuario))
+                    (getAmigos (car ListaUsuario))
+                    (AñadirS (getSeguidores (car ListaUsuario)) username seguido))
+              (addSeguidor (cdr ListaUsuario) username seguido))
+         (cons (car ListaUsuario)(addSeguidor (cdr ListaUsuario) username seguido)))))
+
+
+(define (AñadirS ListaSeguidores username seguido)
+    (if (null? ListaSeguidores)
+      (cons username null)
+      (cons (car ListaSeguidores) (AñadirS (cdr ListaSeguidores) username seguido))))
 
 
