@@ -44,14 +44,41 @@
 (define (getDirigido Publicacion)
   (list-ref Publicacion 9))
 
+; devuelva la publicacion con cierto id
+
+(define (findP id ListaPublicacion)
+  (if (null? ListaPublicacion)
+      #f
+      (if (eqv? (getIDPublicacion(car ListaPublicacion)) id)
+          (Publicacion
+           (getIDPublicacion (car ListaPublicacion))
+           (getAutor (car ListaPublicacion))
+           (getFecha (car ListaPublicacion))
+           (getTipo (car ListaPublicacion))
+           (getContenido (car ListaPublicacion))
+           (getRespuestas (car ListaPublicacion))
+           (getReacciones (car ListaPublicacion))
+           (getListaCompartida (car ListaPublicacion))
+           (getVCompartidas (car ListaPublicacion))
+           (getDirigido (car ListaPublicacion)))
+          (findP id (cdr ListaPublicacion)))))
+
+
+
 ;-------------------------------------------------------------------------
 
 ;------------------------------ MODIFICADOR ------------------------------
-
+;ESTO NO HACE NADA
 (define (addListaDirigido Lusuarios)
   (if (null? Lusuarios)
       null
       (cons (car Lusuarios) (addListaDirigido (cdr Lusuarios)))))
+
+;RETORNA LISTA PUBLICACION
+(define (addP ListaP Publicacion)
+  (if (null? ListaP)
+      (cons Publicacion null)
+      (cons (car ListaP) (addP (cdr ListaP) Publicacion))))
 
 ;------------------------------- EJEMPLOS --------------------------------
 

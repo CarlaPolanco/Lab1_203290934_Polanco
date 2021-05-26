@@ -15,7 +15,7 @@
             (getEncry socialnetwork)
             (getDecry socialnetwork)
             (getSeccionActiva socialnetwork)
-            (cons (usuario 0 1 username password (list) (list))
+            (cons (usuario 1 username password (list) (list))
                                                   (getUsuarios socialnetwork))(getPublicacion socialnetwork))
       (list (getNombre socialnetwork)
             (getDate socialnetwork)
@@ -35,7 +35,7 @@
                            (getDate socialnetwork)
                            (getEncry socialnetwork)
                            (getDecry socialnetwork)
-                           (AgregarUsuarioActivo user pass (getSeccionActiva socialnetwork))
+                           (AgregarUsuarioActivo user pass)
                            (getUsuarios socialnetwork) 
                            (getPublicacion socialnetwork)))
           socialnetwork)
@@ -59,7 +59,7 @@
                    tipo
                    resp
                    (getPublicacion socialnetwork)
-                   usuarios))))))
+                   usuarios)))))) 
 
 ; FOLLOW
 
@@ -71,12 +71,34 @@
                           (getEncry socialnetwork)
                           (getDecry socialnetwork)
                           (list)
-                          (addSeguidor (getUsuarios socialnetwork)(car(car (getSeccionActiva socialnetwork))) user)
+                          (addSeguidor (getUsuarios socialnetwork)(car(getSeccionActiva socialnetwork)) user)
                           (getPublicacion socialnetwork))))))
 
 ; SHARE
 
-(define (share socialnetwork)(lambda (date)(lambda (ID . user) 4)))
+(define share (lambda (socialnetwork)
+                (lambda (date)
+                  (lambda (ID . user)
+                    (if (null? user)
+                        (list (getNombre socialnetwork)
+                          (getDate socialnetwork)
+                          (getEncry socialnetwork)
+                          (getDecry socialnetwork)
+                          (list)
+                          (addSeguidor (getUsuarios socialnetwork)(car(getSeccionActiva socialnetwork)) user) 
+                          (addPublicacion (getUsuarios socialnetwork)
+                                          (getusernameUA (getSeccionActiva socialnetwork))
+                                          (findP ID (getPublicacion socialnetwork))))
+                        (list (getNombre socialnetwork)
+                          (getDate socialnetwork)
+                          (getEncry socialnetwork)
+                          (getDecry socialnetwork)
+                          (list)
+                          (addSeguidor (getUsuarios socialnetwork)(car(getSeccionActiva socialnetwork)) user) 
+                          (segregacion (getUsuarios socialnetwork)
+                                     (getusernameUA (getSeccionActiva socialnetwork)) user
+                                     (findP ID (getPublicacion socialnetwork)))))))))
+                        
 
 ;SOCIALNETWORK->STRING
 
@@ -97,7 +119,7 @@
 
 (define emptyInstagram (socialnetwork "instagram" fecha encryptFn encryptFn))
 
-(define listaUsuarios (list (usuario 0 4 "marcos" "banana2"  (amigos) (seguidores)) (usuario 0 4 "pia" "banana2" (amigos) (seguidores)) (usuario 0 4 "marcos" "banana2"  (amigos) (seguidores))))
+(define listaUsuarios (list (usuario  4 "marcos" "banana2"  (list) (seguidores)) (usuario  4 "pia" "banana2" (list) (seguidores)) (usuario  4 "marcos" "banana2"  (list) (seguidores))))
 
 
 ;REGISTROS
@@ -113,5 +135,4 @@
 
 (define fb3 (((login fb2 "user1" "pass1" follow) fecha)"user2"))
 (define fb4 (((login fb3 "user3" "pass3" follow) fecha)"user2"))
-fb4
 

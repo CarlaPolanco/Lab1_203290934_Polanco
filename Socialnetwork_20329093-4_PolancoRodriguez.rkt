@@ -52,13 +52,13 @@
 
 (define (AgregarUsuario nombre contra listaUsuario idU)
   (if (null? listaUsuario)
-      (cons (usuario 0 idU nombre contra (list) (list)) null)
+      (cons (usuario idU nombre contra (list) (list)) null)
       (cons  (car listaUsuario) (AgregarUsuario nombre contra (cdr listaUsuario) idU))))
 
 (define (AgregarPost ID Autor Fecha Tipo Contenido ListaPublicacion ListaUserPost)
   (if (null? ListaPublicacion)
       (if (null? ListaUserPost)
-          (cons (list ID Autor Fecha Tipo Contenido (list) (list) (list) 0 (list (car Autor)))null)
+          (cons (list ID Autor Fecha Tipo Contenido (list) (list) (list) 0 (list Autor))null)
           (cons (list ID Autor Fecha Tipo Contenido (list) (list) (list) 0  ListaUserPost)null))
       (cons (car ListaPublicacion) (AgregarPost ID Autor Fecha Tipo Contenido (cdr ListaPublicacion) ListaUserPost))))
 
@@ -72,7 +72,7 @@
          (cons(list (getidU (car ListaUsuario))
                     (getNombreU (car ListaUsuario))
                     (getContra (car ListaUsuario))
-                    (getAmigos (car ListaUsuario))
+                    (getP (car ListaUsuario))
                     (AñadirS (getSeguidores (car ListaUsuario)) username seguido))
               (addSeguidor (cdr ListaUsuario) username seguido))
          (cons (car ListaUsuario)(addSeguidor (cdr ListaUsuario) username seguido)))))

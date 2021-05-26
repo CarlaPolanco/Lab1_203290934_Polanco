@@ -25,10 +25,9 @@
 
 ;---------------------------- MODIFICADOR ----------------------------
 
-(define (AgregarUsuarioActivo nombre contra listaUsuarioA)
-  (if (null? listaUsuarioA)
-      (cons (usuarioActivo nombre contra ) null)
-      (cons  (car listaUsuarioA) (AgregarUsuarioActivo nombre contra (cdr listaUsuarioA)))))
+(define (AgregarUsuarioActivo nombre contra)
+  (list nombre contra))
+  
 
 
 ;---------------------------------------------------------------------

@@ -2,46 +2,53 @@
 
 (provide (all-defined-out))
 
+
 ;**************************** TDA (Usuario) ****************************
 
 
 ;---------------------------- CONSTRUCTOR ----------------------------
 
 (define (usuario Act idU nombre contra listaA listaS)
-  (list Act idU nombre contra listaA listaS))
+  (list idU nombre contra listaA listaS))
 
 ;---------------------------------------------------------------------
 
 ;---------------------------- SELECTORES -----------------------------
 
-(define (getAct usuario)
-  (car usuario))
 
 (define (getidU usuario)
-  (car (cdr usuario)))
+  (car usuario))
 
 (define (getNombreU usuario)
-  (car (cdr (cdr usuario))))
+  (car (cdr usuario)))
 
 (define (getContra usuario)
-  (car (cdr (cdr (cdr usuario)))))
+  (car (cdr (cdr usuario))))
 
 (define (getAmigos usuario)
-  (car (cdr (cdr (cdr (cdr usuario))))))
+  (car (cdr (cdr (cdr usuario)))))
 
 (define (getSeguidores usuario)
-  list-ref usuario 5)
+  (car (cdr (cdr (cdr (cdr usuario))))))
 
-;---------------------------------------------------------------------
+;------------------------- MODIFICADOR --------------------------------
+
+
+(define (addUsuario listaUsuarios username password)
+  (cond((null? listaUsuarios)
+         null)
+       ((and (equal? (getNombreU (car listaUsuarios))username) (equal? (getContra (car listaUsuarios)) password))
+         (car listaUsuarios))
+       (else (addUsuario (cdr listaUsuarios) username password ))))
 
 ;---------------------------- PERTENENCIA ----------------------------
 
 (define (existeUsuario? listaUsuarios nombre)
-  (cond ((null? listaUsuarios)
-         #F)
-        ((eqv? (getNombreU (car (listaUsuarios)) nombre))
-         #T)
-        (else (existeUsuario? (cdr listaUsuarios) nombre))))
+  (if(null? listaUsuarios)
+         #f
+        (if (eqv? (getNombreU (car listaUsuarios)) nombre)
+         #t
+        (existeUsuario? (cdr listaUsuarios) nombre))))
 
 ;---------------------------------------------------------------------
 
