@@ -7,8 +7,8 @@
 
 ;---------------------------- CONSTRUCTOR ----------------------------
 
-(define (Publicacion ID Autor Fecha Tipo Contenido Respuestas Reacciones ListaCompartida VCompartidas listaDirigido )
-  (list ID Autor Fecha Tipo Contenido Respuestas Reacciones ListaCompartida VCompartidas listaDirigido))
+(define (Publicacion ID Autor Fecha Tipo Contenido VCompartidas listaDirigido )
+  (list ID Autor Fecha Tipo Contenido VCompartidas listaDirigido))
 
 ;------------------------------------------------------------------------
 
@@ -29,20 +29,11 @@
 (define (getContenido Publicacion)
   (car (cdr (cdr (cdr (cdr Publicacion))))))
 
-(define (getRespuestas Publicacion)
-  (list-ref Publicacion 5))
-
-(define (getReacciones Publicacion)
-  (list-ref Publicacion 6))
-
-(define (getListaCompartida Publicacion)
-  (list-ref Publicacion 7))
-
 (define (getVCompartidas Publicacion)
-  (list-ref Publicacion 8))
+  (car (cdr (cdr (cdr (cdr (cdr Publicacion)))))))
 
 (define (getDirigido Publicacion)
-  (list-ref Publicacion 9))
+  (car (cdr (cdr (cdr (cdr (cdr (cdr Publicacion))))))))
 
 ; devuelva la publicacion con cierto id
 
@@ -56,9 +47,6 @@
            (getFecha (car ListaPublicacion))
            (getTipo (car ListaPublicacion))
            (getContenido (car ListaPublicacion))
-           (getRespuestas (car ListaPublicacion))
-           (getReacciones (car ListaPublicacion))
-           (getListaCompartida (car ListaPublicacion))
            (getVCompartidas (car ListaPublicacion))
            (getDirigido (car ListaPublicacion)))
           (findP id (cdr ListaPublicacion)))))
@@ -69,10 +57,7 @@
 
 ;------------------------------ MODIFICADOR ------------------------------
 ;ESTO NO HACE NADA
-(define (addListaDirigido Lusuarios)
-  (if (null? Lusuarios)
-      null
-      (cons (car Lusuarios) (addListaDirigido (cdr Lusuarios)))))
+
 
 ;RETORNA LISTA PUBLICACION
 (define (addP ListaP Publicacion)
@@ -88,4 +73,9 @@
 (define listaD (list "carla" "viviana" "polanco"))
 
 
-(define Publicacion1 (Publicacion 0 "carla polanco" (Date 8 "noviembre" 1999) "link" "enlace a faebook" listaRespuestas listaReacciones listaCompartida 4 listaD))
+(define Publicacion1 (Publicacion 0 "carla polanco" (Date 8 "noviembre" 1999) "link" "enlace a faebook" 4 listaD))
+
+(define Publicacion2 (Publicacion 1 "Francisca Marquez" (Date 30 "noviembre" 1998) "link" "enlace a faebook" 4 listaD))
+
+(define p3 (append Publicacion1 Publicacion2));
+

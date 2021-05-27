@@ -54,6 +54,8 @@
                  (getSeguidores (car ListaUsuario))) (addPublicacion (cdr ListaUsuario) user Publicacion))
           (cons (car ListaUsuario) (addPublicacion (cdr ListaUsuario) user Publicacion)))))
 
+
+
 ;---------------------------- PERTENENCIA ----------------------------
 
 (define (existeUsuario? listaUsuarios nombre)
@@ -90,6 +92,15 @@
       (if (findUser ListaUsuario user (car listSeguidores))
           (segregacion (addPublicacion ListaUsuario (car listSeguidores) Publicacion) user (cdr listSeguidores) Publicacion)
           (segregacion ListaUsuario user (cdr listSeguidores) Publicacion))))
+
+;Encontrar usuario devuelve la lista del usuario
+
+(define (encontrarUsuario ListaUsuario usuario)
+  (if (null? ListaUsuario)
+      null
+      (if (eqv? (getNombreU (car ListaUsuario)) usuario)
+          (car ListaUsuario)
+          (encontrarUsuario (cdr ListaUsuario) usuario))))
 
 
 (define (seguidores) (list "juan" "carla" "fran"))

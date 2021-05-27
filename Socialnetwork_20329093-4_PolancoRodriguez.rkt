@@ -58,8 +58,8 @@
 (define (AgregarPost ID Autor Fecha Tipo Contenido ListaPublicacion ListaUserPost)
   (if (null? ListaPublicacion)
       (if (null? ListaUserPost)
-          (cons (list ID Autor Fecha Tipo Contenido (list) (list) (list) 0 (list Autor))null)
-          (cons (list ID Autor Fecha Tipo Contenido (list) (list) (list) 0  ListaUserPost)null))
+          (cons (list ID Autor Fecha Tipo Contenido  0 (list Autor))null)
+          (cons (list ID Autor Fecha Tipo Contenido  0  ListaUserPost)null))
       (cons (car ListaPublicacion) (AgregarPost ID Autor Fecha Tipo Contenido (cdr ListaPublicacion) ListaUserPost))))
 
 ;---------------------------------------------------------------------

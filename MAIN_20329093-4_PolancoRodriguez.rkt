@@ -5,6 +5,8 @@
 (require "TDA_Publicacion_20329093-4_PolancoRodriguez.rkt")
 (require "Socialnetwork_20329093-4_PolancoRodriguez.rkt")
 (require "TDA_UsuarioActivo_20329093-4_PolancoRodriguez.rkt")
+(require "TDA_Date_20329093-4_PolancoRodriguez.rkt")
+(require "TDA_String_20329093-4_PolancoRodriguez.rkt")
 
 ;REGISTER
 
@@ -57,7 +59,7 @@
                    (getusernameUA (getSeccionActiva socialnetwork))
                    date
                    tipo
-                   resp
+                   ((getEncry socialnetwork)resp)
                    (getPublicacion socialnetwork)
                    usuarios)))))) 
 
@@ -85,27 +87,34 @@
                           (getEncry socialnetwork)
                           (getDecry socialnetwork)
                           (list)
-                          (addSeguidor (getUsuarios socialnetwork)(car(getSeccionActiva socialnetwork)) user) 
                           (addPublicacion (getUsuarios socialnetwork)
                                           (getusernameUA (getSeccionActiva socialnetwork))
-                                          (findP ID (getPublicacion socialnetwork))))
+                                          (findP ID (getPublicacion socialnetwork)))
+                          (getPublicacion socialnetwork))
+                        
                         (list (getNombre socialnetwork)
                           (getDate socialnetwork)
                           (getEncry socialnetwork)
                           (getDecry socialnetwork)
-                          (list)
-                          (addSeguidor (getUsuarios socialnetwork)(car(getSeccionActiva socialnetwork)) user) 
+                          (list) 
                           (segregacion (getUsuarios socialnetwork)
                                      (getusernameUA (getSeccionActiva socialnetwork)) user
-                                     (findP ID (getPublicacion socialnetwork)))))))))
+                                     (findP ID (getPublicacion socialnetwork)))
+                          (getPublicacion socialnetwork)))))))
                         
 
 ;SOCIALNETWORK->STRING
 
-(define (socialnetwork->string socialnetwork) 5)
-
-
-
+(define socialnetwork->string (lambda (socialnetwork)
+  (if (null? (getSeccionActiva socialnetwork))
+      (string-append (listNombre->string (getNombre socialnetwork) " ")
+                      (Fecha->string (getDate socialnetwork) " ") 
+                      (listUsuario->string (getUsuarios socialnetwork) (getPublicacion socialnetwork) " " (getDecry socialnetwork))
+                      (listPublicacion->string (getPublicacion socialnetwork) " " (getDecry socialnetwork))) 
+     (string-append (listNombre->string (getNombre socialnetwork) " ") 
+                      (Fecha->string (getDate socialnetwork) " ")
+                      (listUsuarioA->string(encontrarUsuario(getUsuarios socialnetwork)(getusernameUA (getSeccionActiva socialnetwork)))
+                                           (getPublicacion socialnetwork)(getDecry socialnetwork)))))) 
 
 ;------------------------------- EJEMPLOS --------------------------------
 
@@ -134,5 +143,17 @@
 ;LOGION FOLLOW
 
 (define fb3 (((login fb2 "user1" "pass1" follow) fecha)"user2"))
-(define fb4 (((login fb3 "user3" "pass3" follow) fecha)"user2"))
+(define fb4 (((login fb3 "user1" "pass1" follow) fecha)"user3"))
+(define fb5 (((login fb4 "user2" "pass2" follow) fecha)"user1"))
+(define fb6 (((login fb5 "user2" "pass2" follow) fecha)"user3"))
+(define fb7 (((login fb6 "user3" "pass3" follow) fecha)"user1"))
+(define fb8 (((login fb7 "user3" "pass3" follow) fecha)"user2"))
+
+;LOGIN SHARE
+
+(define fb9 (((login fb8 "user1" "pass1" share) fecha) 1 "user2" "user3"))
+
+;(display (login fb9 "user2" "pass2" socialnetwork->string))
+
+
 
