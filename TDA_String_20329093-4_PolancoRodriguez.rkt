@@ -33,6 +33,7 @@
                  "PUBLICACIONES COMPARTIDAS: "(listPublicacion->string (getP Usuario) " " decry) "\n"
                  "SEGUIDORES: "(listSeguidores->string (getSeguidores Usuario) " ") "\n"
                  "PUBLICACIONES: " (tusPublicaciones->string ListaPublicaciones (getNombreU Usuario) " " decry) "\n"))
+
 ;---------------------------------------------------------------------
 ;STRING PARA LISTA DE USUARIOS
 
@@ -70,7 +71,8 @@
           (tusPublicaciones->string (cdr ListaP) usuario (string-append string "\n" "          AUTOR: " (getAutor (car ListaP)) "\n"
                                                                     "          CONTENIDO: " (decry(getContenido(car ListaP))) "\n") decry)
           (tusPublicaciones->string (cdr ListaP) usuario string decry))))
-;;---------------------------------------------------------------------
+
+;---------------------------------------------------------------------
 ;STRING PARA SEGUIDORES
 
 (define (listSeguidores->string Lista string)
@@ -78,14 +80,21 @@
       (listSeguidores->string (cdr Lista) (string-append "\n" "SEGUIDOR: "
                                                       (car Lista) " " string ))))
 
+;---------------------------------------------------------------------
 ;STRING PARA DIRIGIDAS
 
 (define (listDirigida->string Lista string)
   (if (null? Lista) string
       (listDirigida->string (cdr Lista) (string-append "\n" "          DIRIGIDO: "
                                                       (car Lista) " " string ))))
+;---------------------------------------------------------------------
 
-;Existe usuario (funcion boobleana)
+;OTRAS FUNCIONES: Funcion booleana
+;Descripcion: Comprueba si existe el usuario
+;Dominio: listaU = lista de usuarios, usuarios = nombre del usuario a buscar
+;Recorrido: booleano
+;Recursion: Natural
+
 (define (ExisteU ListaU usuario)
   (if (null? ListaU)
       #f
@@ -93,7 +102,7 @@
           #t
           (ExisteU (cdr ListaU) usuario))))
 
-;EJEMPLOSS
+;------------------------------- EJEMPLOS ---------------------------------------
 
 ;(define listaUsuarios (list (usuario  4 "marcos" "banana2"  Publicacion1 (seguidores)) (usuario  4 "pia" "banana2" Publicacion1 (seguidores)) (usuario  4 "marcos" "banana2"  Publicacion1 (seguidores))))
 ;(listUsuarioA->string (UsuarioAC) " " )

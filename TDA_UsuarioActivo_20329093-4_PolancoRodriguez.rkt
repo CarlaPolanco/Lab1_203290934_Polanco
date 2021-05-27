@@ -5,33 +5,42 @@
 
 ;**************************** TDA (Usuario Activo) ****************************
 
+;--------------------------------------------------------
+;REPRESENTACION: TDA Usuario Activo
+;listaUsuarioActivo: '(Nombre Contraseña)
+;--------------------------------------------------------
 
 ;---------------------------- CONSTRUCTOR ----------------------------
 
-(define (usuarioActivo username password)
-  (list username password))
+;Constructor: Crea un usuario activo
+;Descripcion: Crea usuario activo
+;Dominio: lista TDA usuarioActivo
+;Recorrido: list
+;Recursion:-
+(define (AgregarUsuarioActivo nombre contra)
+  (list nombre contra))
 
 ;---------------------------------------------------------------------
 
 ;---------------------------- SELECTORES -----------------------------
 
-(define (getusernameUA usuarioActivo)
-  (car usuarioActivo))
+;SELECTOR: Selecciona el nombre del usuario activo
+;Descripcion:Selecciona el nombre del usuario activo
+;Dominio: lista TDA usuarioActivo
+;Recorrido: list
+;Recursion:-
+(define (getusernameUA AgregarUsuarioActivo)
+  (car AgregarUsuarioActivo))
 
-(define (getpasswordUA usuarioActivo)
-  (car (cdr usuarioActivo)))
+;SELECTOR: Selecciona la contraseña del usuario activo
+;Descripcion:Selecciona la contraseña del usuario activo
+;Dominio: lista TDA usuarioActivo
+;Recorrido: list
+;Recursion:-
+(define (getpasswordUA AgregarUsuarioActivo)
+  (car (cdr AgregarUsuarioActivo)))
 
 ;---------------------------------------------------------------------
 
-;---------------------------- MODIFICADOR ----------------------------
 
-(define (AgregarUsuarioActivo nombre contra)
-  (list nombre contra))
-  
-
-
-;---------------------------------------------------------------------
-
-
-
-(define (UsuarioAC)(usuarioActivo "Manuel" "banana2"))
+(define (UsuarioAC)(AgregarUsuarioActivo "Manuel" "banana2"))

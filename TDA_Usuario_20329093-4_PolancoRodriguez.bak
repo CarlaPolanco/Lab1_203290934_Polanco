@@ -5,34 +5,72 @@
 
 ;**************************** TDA (Usuario) ****************************
 
+;--------------------------------------------------------
+;REPRESENTACION: TDA Usuario
+;listaUsuario: '(idU nombre contra listaA listaS)
+;--------------------------------------------------------
 
 ;---------------------------- CONSTRUCTOR ----------------------------
-
-(define (usuario Act idU nombre contra listaA listaS)
+;CONSTRUCTOR: Contruye al usuario
+;Descripcion: Construye al usuario
+;Dominio: idU = id del usuario, nombre = nombre del usuario,
+;               listaA = lista de amigos, listaS = lista de seguidores
+;Recorrido: list usuario
+;Recursion:-
+(define (usuario idU nombre contra listaA listaS)
   (list idU nombre contra listaA listaS))
 
 ;---------------------------------------------------------------------
 
 ;---------------------------- SELECTORES -----------------------------
 
-
+;SELECTOR: ID del usuario
+;Descripcion:Retorna el ID del usuario
+;Dominio: lista TDA usuario
+;Recorrido: numero
+;Recursion:-
 (define (getidU usuario)
   (car usuario))
 
+;SELECTOR: Nombre del usuario
+;Descripcion:Retorna el nombre del usuario
+;Dominio: lista TDA usuario
+;Recorrido: string
+;Recursion:-
 (define (getNombreU usuario)
   (car (cdr usuario)))
 
+;SELECTOR: Contraseña del usuario
+;Descripcion:Retorna la contraseña del usuario
+;Dominio: lista TDA usuario
+;Recorrido: String
+;Recursion:-
 (define (getContra usuario)
   (car (cdr (cdr usuario))))
 
+;SELECTOR: Amigos del usuario
+;Descripcion:Retorna los amigos del usuario
+;Dominio: lista TDA usuario
+;Recorrido: lista de ammigos
+;Recursion:-
 (define (getAmigos usuario)
   (car (cdr (cdr (cdr usuario)))))
 
+;SELECTOR: Seguidores del usuario
+;Descripcion:Retorna los seguidores del usuario
+;Dominio: lista TDA usuario
+;Recorrido: lista de seguidores
+;Recursion:-
 (define (getSeguidores usuario)
   (car (cdr (cdr (cdr (cdr usuario))))))
 
 ;------------------------- MODIFICADOR --------------------------------
 
+;MODIFICADOR: Anade un nuevo usuario
+;Descripcion: Añade un nuevo usuario
+;Dominio: listaUsuarios = lista de usuarios, username = nombre del usuario, password = contraseña del usuario
+;Recorrido: lista con el usuario nuevo
+;Recursion: Natural
 
 (define (addUsuario listaUsuarios username password)
   (cond((null? listaUsuarios)
@@ -43,6 +81,11 @@
 
 ;---------------------------- PERTENENCIA ----------------------------
 
+;Pertenencia: Funcion booleana
+;Descripcion: Comprueba si existe el usuario
+;Dominio: listaUsuarios = lista de usuarios, nombre = nombre del usuario a buscar
+;Recorrido: booleano
+;Recursion: Natural
 (define (existeUsuario? listaUsuarios nombre)
   (if(null? listaUsuarios)
          #f
@@ -50,7 +93,7 @@
          #t
         (existeUsuario? (cdr listaUsuarios) nombre))))
 
-;---------------------------------------------------------------------
+;----------------------------- EJEMPLOS ------------------------------
 
 
 (define (amigos) (list 1 2 3 4 5))
