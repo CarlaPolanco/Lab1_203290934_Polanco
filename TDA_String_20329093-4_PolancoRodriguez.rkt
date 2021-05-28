@@ -45,7 +45,7 @@
                                             "CONTRASEÑA: "(getContra (car Lista)) "\n"
                                             "PUBLICACIONES COMPARTIDAS: "(listPublicacion->string (getP (car Lista)) " " decry) "\n"
                                             "SEGUIDORES: "(listSeguidores->string (getSeguidores (car Lista)) " ") "\n"
-                                            "PUBLICACIONES: " (tusPublicaciones->string ListaPublicaciones (getNombreU (car Lista) decry) " " decry ) "\n" string ))))
+                                            "PUBLICACIONES: " (tusPublicaciones->string ListaPublicaciones (getNombreU (car Lista)) " " decry ) "\n" string )decry)))
 
 ;---------------------------------------------------------------------
 ;STRING PARA PUBLICACIONES
@@ -101,13 +101,3 @@
       (if (equal? (car ListaU) usuario)
           #t
           (ExisteU (cdr ListaU) usuario))))
-
-;------------------------------- EJEMPLOS ---------------------------------------
-
-;(define listaUsuarios (list (usuario  4 "marcos" "banana2"  Publicacion1 (seguidores)) (usuario  4 "pia" "banana2" Publicacion1 (seguidores)) (usuario  4 "marcos" "banana2"  Publicacion1 (seguidores))))
-;(listUsuarioA->string (UsuarioAC) " " )
-;(listUsuario->string listaUsuarios " ")
-
-;(define Publicacion1 (Publicacion 0 "carla polanco" (Date 8 "noviembre" 1999) "link" "enlace a faebook" 4 listaD))
-;(define Publicacion2 (Publicacion 1 "Francisca Marquez" (Date 30 "noviembre" 1998) "link" "enlace a faebook" 4 listaD))
-;(define p3 (append Publicacion1 Publicacion2))

@@ -40,7 +40,7 @@
 (define (getpasswordUA AgregarUsuarioActivo)
   (car (cdr AgregarUsuarioActivo)))
 
-;---------------------------------------------------------------------
+;------------------------------ EJEMPLOS --------------------------------
 
 
 (define (UsuarioAC)(AgregarUsuarioActivo "Manuel" "banana2"))

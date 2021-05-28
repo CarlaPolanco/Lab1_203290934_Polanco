@@ -154,4 +154,8 @@
       (cons username null)
       (cons (car ListaSeguidores) (AñadirS (cdr ListaSeguidores) username seguido))))
 
+;------------------------------ EJEMPLOS ----------------------------
+
+(define fecha (Date 20 10 1999))
+(define emptyFB (socialnetwork "fb" fecha encryptFn encryptFn))
 

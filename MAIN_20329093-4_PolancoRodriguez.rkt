@@ -8,8 +8,11 @@
 (require "TDA_Date_20329093-4_PolancoRodriguez.rkt")
 (require "TDA_String_20329093-4_PolancoRodriguez.rkt")
 
-;REGISTER
-
+;FUNCION: REGISTER
+;Descripcion: Registra un nuevo usuario
+;Dominio: socialnetwork x Date (list) x string x string
+;Recorrido: socialnetwork
+;Recursion: -
 (define(register socialnetwork date username password)
   (if (null? (getUsuarios socialnetwork))
       (list (getNombre socialnetwork)
@@ -28,7 +31,12 @@
                                                             (getUltimoID(getUsuarios socialnetwork)))
             (getPublicacion socialnetwork))))
 
-;LOGIN
+;FUNCION: LOGIN
+;Descripcion: Inicia sesion de un usuario y lo agrega a la lista de los usuarios activos.
+;Dominio: socialnetwork x string x string x funcion
+;Recorrido: funcion
+;Recorrido Final: socialnetwork 
+;Recursion:- 
 
 (define (login socialnetwork user pass operacion)
   (if (existeUsuario? (getUsuarios socialnetwork) user)
@@ -44,7 +52,12 @@
       (operacion socialnetwork)))
 
 
-;POST
+;FUNCION: POST
+;Descripcion: Crea una nuneva publicacion y lo elimina de la lista de los usuarios activos.
+;Dominio: socialnetwork 
+;Recorrido: date X string (contenido) X user list
+;Recorrido Final: socialnetwork 
+;Recursion:- 
 
 (define post (lambda (socialnetwork)
               (lambda (date)
@@ -63,8 +76,12 @@
                    (getPublicacion socialnetwork)
                    usuarios)))))) 
 
-; FOLLOW
-
+;FUNCION: FOLLOW
+;Descripcion: Sigue a otro usuario y lo elimina de la lista de los usuarios activos.
+;Dominio: socialnetwork
+;Recorrido: date X user
+;Recorrido Final: socialnetwork 
+;Recursion:- 
 (define follow (lambda (socialnetwork)
                  (lambda (date)
                    (lambda (user)
@@ -76,7 +93,12 @@
                           (addSeguidor (getUsuarios socialnetwork)(car(getSeccionActiva socialnetwork)) user)
                           (getPublicacion socialnetwork))))))
 
-; SHARE
+;FUNCION: SHARE
+;Descripcion: Comparte una publicacion y lo elimina de la lista de los usuarios activos.
+;Dominio: socialnetwork
+;Recorrido: date X postID X userList
+;Recorrido Final: socialnetwork 
+;Recursion:- 
 
 (define share (lambda (socialnetwork)
                 (lambda (date)
@@ -103,7 +125,13 @@
                           (getPublicacion socialnetwork)))))))
                         
 
-;SOCIALNETWORK->STRING
+
+
+;FUNCION: SOCIALNETWORK->STRING
+;Descripcion: Convierte los datos de la socialnetwork a string para visualisacion del usuario.
+;Dominio: socialnetwork
+;Recorrido: String 
+;Recursion:- 
 
 (define socialnetwork->string (lambda (socialnetwork)
   (if (null? (getSeccionActiva socialnetwork))
@@ -119,10 +147,6 @@
 ;------------------------------- EJEMPLOS --------------------------------
 
 (define fecha (list 25 10 2021))
-
-;(define fb (socialnetwork "FB" fecha encryptFn encryptFn ))
-
-(define emptyFB (socialnetwork "fb" fecha encryptFn encryptFn))
 
 (define emptyTwitter (socialnetwork "twitter" fecha encryptFn encryptFn))
 
@@ -153,7 +177,11 @@
 
 (define fb9 (((login fb8 "user1" "pass1" share) fecha) 1 "user2" "user3"))
 
-;(display (login fb9 "user2" "pass2" socialnetwork->string))
+;socialnetwork->string
+
+(display (login fb9 "user2" "pass2" socialnetwork->string))
+
+(display (socialnetwork->string fb9))
 
 
 
